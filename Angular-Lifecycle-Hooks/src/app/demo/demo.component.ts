@@ -1,11 +1,11 @@
-import { Component,Input,OnChanges,SimpleChanges,OnInit, ViewChild, ElementRef,DoCheck } from '@angular/core';
+import { Component,Input,OnChanges,SimpleChanges,OnInit, ViewChild, ElementRef,DoCheck, AfterContentInit, ContentChild } from '@angular/core';
 
 @Component({
   selector: 'app-demo',
   templateUrl: './demo.component.html',
   styleUrls: ['./demo.component.css']
 })
-export class DemoComponent implements OnChanges, OnInit, DoCheck {
+export class DemoComponent implements OnChanges, OnInit, DoCheck, AfterContentInit {
 title: string = 'DemoComponent' ;
 
 
@@ -14,6 +14,9 @@ title: string = 'DemoComponent' ;
   
   @ViewChild('temp')
   tempPara!: ElementRef;
+
+  @ContentChild('temp')
+  paraContent!:ElementRef;
 
 constructor (){
   
@@ -34,6 +37,13 @@ ngOnInit(){
 }
 ngDoCheck(){
   console.log('ngDOCheck hook called');
+  console.log('In ngDoCheck',this.paraContent);
+  
+  
+}
+ngAfterContentInit(){
+  console.log('ngAfterContentInit hook called');
+  console.log('In ngDoCheck',this.paraContent.nativeElement);
   
 }
 }
